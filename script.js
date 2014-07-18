@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	//what does this do?
+	//what does this do?  It takes a value over 10 and converts it to a face card
 	function convert_value_to_string(value) {
 		if (value > 10) {
 			switch (value) {
@@ -18,7 +18,7 @@ $(document).ready(function() {
 		return value.toString();
 	}
 
-	//what does this do?
+	//what does this do?  It gives each random number a suite assignment (hearts, diamonds, spades, or clubs)
 	var deck = [];
 	var suits = ['hearts', 'diamonds', 'spades', 'clubs'];
 	for (var i = 0; i<suits.length; i++) {
@@ -29,15 +29,51 @@ $(document).ready(function() {
 	}
 	
 	//shuffle the deck
+
+	function shuffle(array) {
+ 		var m = array.length, t, i;
+
+  	// While there remain elements to shuffle…
+  		while (m) {
+
+    // Pick a remaining element…
+    	i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    	t = array[m];
+    	array[m] = array[i];
+    	array[i] = t;
+	}
+
+  	return array;
+	}
 	
+	shuffle(deck);
 	
-	var cards_player_1 = [];
-	var cards_player_2 = [];
+
 	//divide out the cards into the two arrays
 	
-	
+	var cards_player_1 = deck.splice(0,26);
+	var cards_player_2 = deck
+	var winner, loser;
+
+	// WORKS UP TO THIS POINT!
 	//create a function (algorithm) called "war" that takes two cards as parameters, compares them and returns a winner. A tie should return false.
-	function war() {
+	function war(player1draw,player2draw) {
+
+		if(player1draw.number > player2draw.number){
+			var winningcard = 'cards_player_1';
+			var losingcard = 'cards_player_2';
+			console.log('winner is ' + winner + ' loser is ' + loser);
+			return winningcard;
+		} else if(player1draw.number === player2draw.number){
+			winner = 'tie'
+			console.log(winner)
+			return false;
+		} else {
+			winner = 'cards_player_2';
+			loser = 'cards_player_1';
+		}
 	}
 	
 	
@@ -45,7 +81,10 @@ $(document).ready(function() {
 		//compare the cards
 		//give the winner both cards (at end of deck)
 	function play() {
-		
+		pull the cards
+		winner = war(cards_player_1[0],cards_player_2[0])
+		//who was the winner
+		//was it false?
 		//this function (defined below) will continue to the next turn
 		advance();
 	}
